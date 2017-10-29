@@ -18,15 +18,10 @@ def get_online_friends(login, password):
         app_id=APP_ID,
         user_login=login,
         user_password=password,
+        scope='friends',
     )
     api = vk.API(session)
-    friends_ids = api.friends.get()
-    friends_online = []
-    for friend_id in friends_ids:
-        friend = api.users.get(user_id=friend_id, fields='online')[0]
-        if friend['online']:
-            friends_online.append(friend)
-    return friends_online
+    return api.friends.getOnline()
 
 
 def output_friends_to_console(friends_online):
