@@ -23,9 +23,7 @@ def get_online_friends(login, password):
     api = vk.API(session)
     friends_online_ids = api.friends.getOnline()
     if friends_online_ids:
-        return api.users.get(
-            user_id=", ".join(map(str, friends_online_ids)),
-        )
+        return api.users.get(user_ids=friends_online_ids)
     else:
         return None
 
